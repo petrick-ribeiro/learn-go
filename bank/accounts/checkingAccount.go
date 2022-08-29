@@ -1,0 +1,45 @@
+package accounts
+
+import (
+  "bank/holders"
+  )
+
+type CheckingAccount struct {
+  AccountHolder holders.Holder
+  AccountCode, AccountNumber int
+  accountBalance float64
+}
+
+func (a *CheckingAccount) Withdraw(withdrawalAmount float64) (string, float64){
+  checkAmount := withdrawalAmount > 0 && withdrawalAmount <= a.accountBalance
+  if checkAmount {
+    a.accountBalance -= withdrawalAmount
+    return "Success.", a.accountBalance
+  } else {
+    return "Withdraw failed.", a.accountBalance
+  }
+}
+
+func (a *CheckingAccount) Deposit(depositAmount float64) (string, float64) {
+  checkAmount := depositAmount > 0
+  if checkAmount {
+    a.accountBalance += depositAmount
+    return "Success.", a.accountBalance
+  } else {
+    return "Deposit failed.", a.accountBalance
+  }
+}
+
+func (a *CheckingAccount) Transfer(transferAmount float64, destinationAccount *CheckingAccount) (string, float64){
+  if transferAmount > 0 && transferAmount < a.accountBalance {
+    a.accountBalance -= transferAmount
+    destinationAccount.accountBalance += transferAmount
+    return "Sucess.", destinationAccount.accountBalance
+  } else {
+    return "Failed.", destinationAccount.accountBalance
+  }
+}
+
+func (a *CheckingAccount) GetBalance() float64{
+  return a.accountBalance
+}

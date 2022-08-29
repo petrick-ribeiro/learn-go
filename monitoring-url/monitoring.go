@@ -20,6 +20,7 @@ func main()  {
 
   for {
     displayMenu()
+    fmt.Println("")
     opt := getOption()
 
     switch opt {
