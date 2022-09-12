@@ -2,7 +2,7 @@
 port = "9000"
 
 [database]
-host = "localhost"
+host = "todo-db"
 user = "user_todo"
-pass = "test"
+pass = "foobar"
 name = "api_todo"

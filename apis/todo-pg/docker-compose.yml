@@ -1,0 +1,32 @@
+version: "3"
+
+volumes:
+  postgres_db:
+
+networks:
+  todo_net:
+
+services:
+  todo:
+    build: .
+    restart: always
+    container_name: todo-go
+    ports:
+      - 9000:9000
+    networks:
+      - todo_net
+    depends_on:
+      - db
+
+  db:
+    image: postgres:alpine
+    restart: always
+    container_name: todo-db
+    volumes:
+      - postgres_db:/var/lib/postgresql/
+      - ./postgres_scripts/:/docker-entrypoint-initdb.d/
+    environment:
+      POSTGRES_USER: user_todo
+      POSTGRES_PASSWORD: "foobar"
+    networks:
+      - todo_net
