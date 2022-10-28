@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"coffe-shop/data"
+	"coffee-shop/data"
 	"encoding/json"
 	"log"
 	"net/http"

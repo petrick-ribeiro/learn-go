@@ -1,7 +1,7 @@
 package main
 
 import (
-	"coffe-shop/handlers"
+	"coffee-shop/handlers"
 	"context"
 	"log"
 	"net/http"
