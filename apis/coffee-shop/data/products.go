@@ -1,7 +1,12 @@
 package data
 
-import "time"
+import (
+	"encoding/json"
+	"io"
+	"time"
+)
 
+// Create the structure of data for API
 type Product struct {
 	ID          int     `json:"id"`
 	Name        string  `json:"name"`
@@ -13,8 +18,31 @@ type Product struct {
 	DeleteOn    string  `json:"-"`
 }
 
-func GetProducts() []*Product {
-	return productList
+func (p *Product) FromJSON(r io.Reader) error {
+  e := json.NewDecoder(r)
+  return e.Decode(p)
+}
+
+// Collection of Product
+type Products []*Product
+
+func (p *Products) ToJSON(w io.Writer) error {
+  e := json.NewEncoder(w)
+  return e.Encode(p)
+}
+
+func GetProducts() Products {
+  return productList
+}
+
+func AddProduct(p *Product)  {
+  p.ID = getNextID()
+  productList = append(productList, p)
+}
+
+func getNextID() int {
+  lp := productList[len(productList) -1]
+  return lp.ID + 1
 }
 
 var productList = []*Product{
