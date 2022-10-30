@@ -3,6 +3,7 @@ package handlers
 import (
 	"coffee-shop/data"
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -77,6 +78,19 @@ func (p Products) ValidateProduct(next http.Handler) http.Handler {
       return
     }
 
+    // Sanitize
+    err = prod.Validate()
+    if err != nil {
+      p.l.Println("Error validating product", err)
+      http.Error(
+        w,
+        fmt.Sprintf("Error validating product: %s", err),
+        http.StatusBadRequest,
+      )
+      return
+    }
+
+    // Add to the context
     ctx := context.WithValue(r.Context(), KeyProduct{}, prod)
     req := r.WithContext(ctx) 
     
