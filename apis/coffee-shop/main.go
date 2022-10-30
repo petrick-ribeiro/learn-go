@@ -1,6 +1,6 @@
 /*
-* A Coffee Shop App API using Go standard library.
-*/
+ *  A Coffee Shop App API using Go standard library.
+ */
 
 package main
 
