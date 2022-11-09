@@ -9,6 +9,8 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+
 func Connect()  {
   cfg := config.GetDB()
 
@@ -21,6 +23,8 @@ func Connect()  {
   if err != nil {
     panic(err)
   }
+
+  DB = conn
 
   conn.AutoMigrate(&models.User{})
 
