@@ -18,8 +18,10 @@ func main()  {
     weather := h.ChildText(".CurrentConditions--tempValue--MHmYY")
     phrase := h.ChildText(".CurrentConditions--phraseValue--mZC_p")
 
+    fmt.Println("")
     fmt.Println("🌤️", weather)
     fmt.Println(phrase)
+
   })
 
   // Get the HTTP status code.
@@ -28,9 +30,9 @@ func main()  {
   //   fmt.Println("Status Code:", r.Request.URL) 
   // })
 
-  c.OnRequest(func(r *colly.Request) {
-    fmt.Println("Visiting...")
-  })
+  // c.OnRequest(func(r *colly.Request) {
+  //   fmt.Println("Visiting...")
+  // })
 
 
   // Define the url and acess.
