@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gocolly/colly/v2"
 )
 
 func main()  {
+  dt := time.Now()
 
   // Enable the domain.
   c := colly.NewCollector(
@@ -21,6 +23,7 @@ func main()  {
     fmt.Println("")
     fmt.Println("🌤️", weather)
     fmt.Println(phrase)
+    fmt.Println("Curitiba -", dt.Format("02/01/2006 15:04"))
 
   })
 
