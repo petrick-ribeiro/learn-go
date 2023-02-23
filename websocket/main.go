@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
@@ -49,7 +50,11 @@ func WsEndpoint(w http.ResponseWriter, r *http.Request)  {
     }
 
     fmt.Printf("Message Received: %s\n", msg.Greeting)
-    SendMessage("Hello, client!")
+    if strings.ToLower(msg.Greeting) == "ping" {
+      SendMessage("Pong!")
+    } else {
+      SendMessage("Hello, client!")
+    }
   }
 }
 
